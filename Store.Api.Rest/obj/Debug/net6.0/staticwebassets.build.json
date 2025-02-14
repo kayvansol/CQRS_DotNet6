@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "O89rogif+R0+fAKajO3VwfRPZgcqPNAWe/nucHsa0Xw=",
+  "Source": "Store.Api.Rest",
+  "BasePath": "_content/Store.Api.Rest",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
