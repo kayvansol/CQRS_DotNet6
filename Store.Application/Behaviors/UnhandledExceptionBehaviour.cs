@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Store.Application.Behaviors
 {
-    internal class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
 
         public UnhandledExceptionBehaviour()
