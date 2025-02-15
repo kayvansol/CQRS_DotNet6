@@ -26,7 +26,7 @@ namespace Store.Infra.Sql.Repositories.CategoryRepo
             _mapper = mapper;
         }
 
-        public async Task<Category> Cresate(Category data)
+        public async Task<Category> Create(Category data)
         {
             _context.Add(data);
             _context.SaveChanges();

@@ -15,7 +15,7 @@ namespace Store.Infra.Sql.Repositories.CategoryRepo
 
         Task<Pagination<GetAllCategoryDto>> GetAllCategories(int statrtPage, int pageSize);
 
-        Task<Category> Cresate(Category data);
+        Task<Category> Create(Category data);
     }
 
 }
