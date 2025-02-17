@@ -11,6 +11,7 @@ using Store.Infra.Sql.LogContext;
 using Store.Domain.Objects;
 using Store.Api.Rest.Mapper;
 using Store.Infra.Sql.Context;
+using Hangfire;
 //using Microsoft.EntityFrameworkCore.InMemory;
 
 namespace Store.Api.Rest.Startup
@@ -91,6 +92,20 @@ namespace Store.Api.Rest.Startup
                 });
             });
 
+            services.AddScoped<ICronJobs, CronJobs>();
+
+            services.AddHangfire(config => config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170).UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(configuration.GetSection("ApplicationOptions:HangFireConnectionString").Value, new Hangfire.SqlServer.SqlServerStorageOptions
+            {
+                CommandBatchMaxTimeout = TimeSpan.FromMinutes(6),
+                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(6),
+                QueuePollInterval = TimeSpan.Zero,
+                UseRecommendedIsolationLevel = true,
+                DisableGlobalLocks = true,
+                //CountersAggregateInterval = TimeSpan.FromMinutes(5)
+            })
+            );
+
+            services.AddHangfireServer(option => option.Queues = new[] { "datetimequeue", "randomqueue" });
 
         }
     }

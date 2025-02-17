@@ -1,4 +1,6 @@
-﻿using Store.Api.Rest.Middlewares;
+﻿using Hangfire;
+using Store.Api.Rest.Middlewares;
+using Store.Api.Rest.Services;
 
 namespace Store.Api.Rest.Startup
 {
@@ -22,6 +24,18 @@ namespace Store.Api.Rest.Startup
             webApplication.UseSwagger();
 
             webApplication.UseSwaggerUI();
+
+            var interval = int.Parse(webApplication.Configuration["HangFireSettings:interval"]);
+
+            webApplication.UseHangfireDashboard();
+
+            webApplication.MapHangfireDashboard();
+
+            RecurringJob.AddOrUpdate<ICronJobs>(x => x.GetAppUpDateTime(), Cron.MinuteInterval(1), TimeZoneInfo.Local,"datetimequeue"
+                );
+
+            RecurringJob.AddOrUpdate<ICronJobs>(x => x.GetRandomNumber(),$"0/{interval} * * * * *" , TimeZoneInfo.Local, "randomqueue"
+                );
 
         }
     }

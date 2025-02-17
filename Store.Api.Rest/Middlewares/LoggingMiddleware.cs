@@ -26,6 +26,15 @@ namespace Store.Api.Rest.Middlewares
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
+
+            if (context.Request.Path.HasValue)
+            {
+                if (context.Request.Path.Value.Contains("/hangfire/stats"))
+                {
+                    return;
+                }
+            }
+            
             // Log the request details  
             var requestBody = await LogRequestAsync(context);
 
