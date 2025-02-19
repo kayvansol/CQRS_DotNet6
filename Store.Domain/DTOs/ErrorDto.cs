@@ -17,5 +17,6 @@ namespace Store.Domain.DTOs
         public string? ErrorDetail { get; set; }
 
         public IDictionary<string, string[]>? Errors { get; set; }
+        
     }
 }
