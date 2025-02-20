@@ -1,0 +1,12 @@
+﻿global using System;
+global using Xunit;
+global using Store.Test.Utils;
+global using System.Net;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using AutoMapper;
+global using FluentAssertions;
+global using Store.Infra.Sql.Context;
+global using Store.Infra.Sql.Repositories;
+global using Store.Core.Commands;
+global using System.Collections.Generic;

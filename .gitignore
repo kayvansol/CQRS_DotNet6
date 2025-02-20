@@ -29,3 +29,5 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 .vs/Store
+/.vs/Store/DesignTimeBuild/.dtbcache.v2
+/.vs/Store/v17/.futdcache.v1

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.Test.Data
 {
-    internal class CalculatorTestData : IEnumerable<object[]>
+    public class CalculatorTestData : IEnumerable<object[]>
     {
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -1,4 +1,4 @@
-﻿namespace Store.Test.UnitTests.Data
+﻿namespace Store.Test.UnitTests.Data.Utils
 {
     public class Calculator
     {

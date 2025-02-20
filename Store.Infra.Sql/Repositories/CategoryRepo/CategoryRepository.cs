@@ -3,11 +3,6 @@ using Store.Domain;
 using Store.Domain.DTOs.Category;
 using Store.Domain.Extensions;
 using Store.Infra.Sql.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Store.Domain.Extensions.PaginationExtension;
 
 namespace Store.Infra.Sql.Repositories.CategoryRepo

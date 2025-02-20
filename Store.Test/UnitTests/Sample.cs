@@ -1,5 +1,5 @@
 using Store.Test.Data;
-using Store.Test.UnitTests.Data;
+using Store.Test.UnitTests.Data.Utils;
 using Xunit;
 
 namespace Store.Test.UnitTests

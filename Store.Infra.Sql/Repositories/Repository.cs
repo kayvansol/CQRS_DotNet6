@@ -2,16 +2,11 @@
 using Microsoft.EntityFrameworkCore.Query;
 using Store.Domain.Entities;
 using Store.Infra.Sql.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Store.Infra.Sql.Repositories
 {
-    public class Repository<Entity, Key> : IRepository<Entity, Key>
+    public class Repository<Entity, Key> : IDisposable, IRepository<Entity, Key>
         where Entity : BaseEntity<Key>
         where Key : notnull
     {
@@ -98,5 +93,11 @@ namespace Store.Infra.Sql.Repositories
             _dbSet.Update(entity);
             return entity;
         }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
+
     }
 }
