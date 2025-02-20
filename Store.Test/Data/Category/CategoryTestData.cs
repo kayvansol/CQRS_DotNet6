@@ -2,7 +2,7 @@
 
 namespace Store.Test.Data.Category
 {
-    internal class CategoryTestData
+    public class CategoryTestData
     {
 
         public static IEnumerable<object[]> addCategoryCommandDto()
