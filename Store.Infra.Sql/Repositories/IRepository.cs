@@ -24,7 +24,7 @@ namespace Store.Infra.Sql.Repositories
         Task<Entity?> Get(Key id);
 
         IQueryable<Entity> GetAll(Expression<Func<Entity, bool>>?
-            predict = null,
+            predicate = null,
             Func<IQueryable<Entity>, IOrderedQueryable<Entity>>? orderBy = null, bool disableTracking = true,
             Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>>? Includes = null);
 

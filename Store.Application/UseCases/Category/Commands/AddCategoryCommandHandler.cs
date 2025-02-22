@@ -28,7 +28,7 @@ namespace Store.Application.UseCases.Category.Commands
         {
             var category = mapper.Map<Domain.Category>(request.AddDto);
 
-            await categoryRepository.Create(category);
+            await categoryRepository.CreateAsync(category);
 
             return ResultDto<Unit>.ReturnData(Unit.Value, (int)EnumResponseStatus.OK, (int)EnumResultCode.Success, EnumResultCode.Success.GetDisplayName());
         }

@@ -60,7 +60,7 @@ namespace Store.Infra.Sql.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public IQueryable<Entity> GetAll(Expression<Func<Entity, bool>>? predict = null, Func<IQueryable<Entity>, IOrderedQueryable<Entity>>? orderBy = null, bool disableTracking = true, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>>? Includes = null)
+        public IQueryable<Entity> GetAll(Expression<Func<Entity, bool>>? predicate = null, Func<IQueryable<Entity>, IOrderedQueryable<Entity>>? orderBy = null, bool disableTracking = true, Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>>? Includes = null)
         {
             var query = _dbSet.AsQueryable();
 
@@ -69,7 +69,7 @@ namespace Store.Infra.Sql.Repositories
             if(Includes is not null)
                 query = Includes(query);
 
-            if(predict is not null) query = query.Where(predict);
+            if(predicate is not null) query = query.Where(predicate);
 
             if(orderBy is not null)
                 return orderBy(query);

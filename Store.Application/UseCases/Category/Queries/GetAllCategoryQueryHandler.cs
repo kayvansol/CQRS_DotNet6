@@ -27,7 +27,7 @@ namespace Store.Application.UseCases.Category.Queries
 
         public async Task<ResultDto<List<GetAllCategoryDto>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
         {
-            var result = await categoryRepository.GetAllCategories();
+            var result = await categoryRepository.GetAllCategoriesAsync();
 
             return ResultDto<List<GetAllCategoryDto>>.ReturnData(result, (int)EnumResponseStatus.OK, (int)EnumResultCode.Success, EnumResultCode.Success.GetDisplayName());
         }

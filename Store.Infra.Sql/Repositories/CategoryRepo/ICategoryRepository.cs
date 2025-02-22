@@ -11,11 +11,11 @@ namespace Store.Infra.Sql.Repositories.CategoryRepo
 {
     public interface ICategoryRepository:IRepository<Category, int>
     {
-        Task<List<GetAllCategoryDto>> GetAllCategories();
+        Task<List<GetAllCategoryDto>> GetAllCategoriesAsync();
 
-        Task<Pagination<GetAllCategoryDto>> GetAllCategories(int statrtPage, int pageSize);
+        Task<Pagination<GetAllCategoryDto>> GetAllCategoriesAsync(int statrtPage, int pageSize);
 
-        Task<Category> Create(Category data);
+        Task<Category> CreateAsync(Category data);
     }
 
 }

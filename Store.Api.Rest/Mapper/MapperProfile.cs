@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Store.Domain;
 using Store.Domain.DTOs.Category;
+using Store.Domain.DTOs.Product;
 
 namespace Store.Api.Rest.Mapper
 {
@@ -17,6 +18,10 @@ namespace Store.Api.Rest.Mapper
             CreateMap<Category, GetAllCategoryDto>().ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.CategoryName));
 
             CreateMap<AddCategoryCommandDto, Category>().ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.CategoryName));
+
+            CreateMap<Product, GetAllProductDto>().ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.CategoryName));
+
+            CreateMap<AddProductCommandDto, Product>();
 
         }
     }
