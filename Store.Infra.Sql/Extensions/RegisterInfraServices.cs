@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Store.Infra.Sql.Repositories;
 using Store.Infra.Sql.Repositories.CategoryRepo;
+using Store.Infra.Sql.Repositories.CustomerRepo;
 using Store.Infra.Sql.Repositories.ProductRepo;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Store.Infra.Sql.Extensions
 
             service.AddScoped<ICategoryRepository, CategoryRepository>();
             service.AddScoped<IProductRepository, ProductRepository>();
+            service.AddScoped<ICustomerRepository, CustomerRepository>();
         }
     }
 }
