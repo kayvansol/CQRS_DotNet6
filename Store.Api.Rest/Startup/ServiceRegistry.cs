@@ -12,6 +12,8 @@ using Store.Domain.Objects;
 using Store.Api.Rest.Mapper;
 using Store.Infra.Sql.Context;
 using Hangfire;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.AspNetCore.Authorization;
 //using Microsoft.EntityFrameworkCore.InMemory;
 
 namespace Store.Api.Rest.Startup
@@ -69,7 +71,7 @@ namespace Store.Api.Rest.Startup
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
 
-            services.AddSwaggerGen(a =>
+            /*services.AddSwaggerGen(a =>
             {
                 a.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -90,7 +92,9 @@ namespace Store.Api.Rest.Startup
                 Array.Empty<string>()
                     }
                 });
-            });
+            });*/
+
+
 
             services.AddScoped<ICronJobs, CronJobs>();
 
@@ -107,6 +111,76 @@ namespace Store.Api.Rest.Startup
 
             services.AddHangfireServer(option => option.Queues = new[] { "datetimequeue", "randomqueue" });
 
+
+            services.AddAuthorization(c =>
+            {
+                c.AddPolicy("MyApiPolicy", policy =>
+                 {
+                     policy.RequireAuthenticatedUser();
+                     policy.RequireClaim("scope", "api_rest");
+                 });
+            });
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", option =>
+                {
+                    option.Authority = "https://localhost:7003";
+                    option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateAudience = false
+                    };
+                });
+
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Protected API", Version = "v1" });
+
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri("https://localhost:7003/connect/authorize"),
+                            TokenUrl = new Uri("https://localhost:7003/connect/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {"api1", "Demo API - full access"}
+                            }
+                        }
+                    }
+                });
+
+                options.OperationFilter<AuthorizeCheckOperationFilter>();
+            });
+        }
+
+    }
+
+    public class AuthorizeCheckOperationFilter : IOperationFilter
+    {
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+        {
+            var hasAuthorize = context.MethodInfo.DeclaringType.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any() ||
+                               context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();
+
+            if (hasAuthorize)
+            {
+                operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
+                operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
+
+                operation.Security = new List<OpenApiSecurityRequirement>
+                {
+                    new OpenApiSecurityRequirement
+                    {
+                        [new OpenApiSecurityScheme {Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}}]
+                            = new[] { "api1" }
+                    }
+                };
+            }
         }
     }
+
 }

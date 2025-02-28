@@ -23,7 +23,16 @@ namespace Store.Api.Rest.Startup
 
             webApplication.UseSwagger();
 
-            webApplication.UseSwaggerUI();
+            //webApplication.UseSwaggerUI();
+
+            webApplication.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+
+                options.OAuthClientId("demo_api_swagger");
+                options.OAuthAppName("Demo API - Swagger");
+                options.OAuthUsePkce();
+            });
 
             var interval = int.Parse(webApplication.Configuration["HangFireSettings:interval"]);
 

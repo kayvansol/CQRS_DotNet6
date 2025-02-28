@@ -14,7 +14,7 @@ namespace Store.Api.Rest.Controllers
     public class CategoryController : BaseController
     {
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost("GetAllCategories")]
         public async Task<ResultDto<List<GetAllCategoryDto>>> GetAllCategories(GetAllCategoryQuery query, CancellationToken cancellationToken)
         {
