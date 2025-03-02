@@ -28,7 +28,8 @@ namespace Store.Api.Rest.Startup
             webApplication.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-
+                options.OAuthClientSecret("swagger");
+                options.OAuthScopes("api_rest");
                 options.OAuthClientId("demo_api_swagger");
                 options.OAuthAppName("Demo API - Swagger");
                 options.OAuthUsePkce();

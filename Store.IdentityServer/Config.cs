@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 
 namespace Store.IdentityServer;
 
@@ -14,14 +15,13 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new List<ApiScope>
         {
-            new ApiScope(name: "api_rest", displayName: "Weather Forecast"),
-            new ApiScope("api1", "Full access to API #1") // "full access" scope
+            new ApiScope(name: "api_rest", displayName: "Weather Forecast")
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
         new List<ApiResource>
         {
-            new ApiResource("api1", "API #1") {Scopes = {"api1"}}
+            new ApiResource("api_rest", "API #1") {Scopes = {"api_rest"}}
         };
 
     public static IEnumerable<Client> Clients =>
@@ -38,16 +38,45 @@ public static class Config
                 AllowedScopes = { "api_rest" }
             },
             new Client
+            {
+                ClientId="web",
+                ClientSecrets =
+                {
+                    new Secret("secret".Sha256())
+                },
+                AllowedGrantTypes= GrantTypes.Code,
+                RedirectUris =
+                {
+                    "https://localhost:7205/signin-oidc"
+                },
+                PostLogoutRedirectUris =
+                {
+                     "https://localhost:7205/signout-callback-oidc"
+                },
+                AllowOfflineAccess=true,
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "api_rest"
+                }
+            },
+            new Client
                 {
                     ClientId = "demo_api_swagger",
                     ClientName = "Swagger UI for demo_api",
-                    ClientSecrets = {new Secret("secret".Sha256())}, // change me!
+                    ClientSecrets = {new Secret("swagger".Sha256())}, // change me!
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
                     RequireClientSecret = false,
                     RedirectUris = {"https://localhost:7084/swagger/oauth2-redirect.html"},
                     AllowedCorsOrigins = {"https://localhost:7084"},
-                    AllowedScopes = { "api1" }
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api_rest"
+                    }
                 }
         };
 }

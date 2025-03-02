@@ -14,6 +14,9 @@ using Store.Infra.Sql.Context;
 using Hangfire;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 //using Microsoft.EntityFrameworkCore.InMemory;
 
 namespace Store.Api.Rest.Startup
@@ -116,7 +119,7 @@ namespace Store.Api.Rest.Startup
             {
                 c.AddPolicy("MyApiPolicy", policy =>
                  {
-                     policy.RequireAuthenticatedUser();
+                     //policy.RequireAuthenticatedUser();
                      policy.RequireClaim("scope", "api_rest");
                  });
             });
@@ -129,6 +132,7 @@ namespace Store.Api.Rest.Startup
                     {
                         ValidateAudience = false
                     };
+                    
                 });
 
 
@@ -147,7 +151,7 @@ namespace Store.Api.Rest.Startup
                             TokenUrl = new Uri("https://localhost:7003/connect/token"),
                             Scopes = new Dictionary<string, string>
                             {
-                                {"api1", "Demo API - full access"}
+                                {"api_rest", "Demo API - full access"}
                             }
                         }
                     }
@@ -176,7 +180,7 @@ namespace Store.Api.Rest.Startup
                     new OpenApiSecurityRequirement
                     {
                         [new OpenApiSecurityScheme {Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}}]
-                            = new[] { "api1" }
+                            = new[] { "api_rest" }
                     }
                 };
             }
