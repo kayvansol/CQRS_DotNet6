@@ -7,6 +7,7 @@ using AutoMapper;
 using Store.Domain;
 using Store.Domain.DTOs.Category;
 using Store.Domain.DTOs.Customer;
+using Store.Domain.DTOs.Order;
 using Store.Domain.DTOs.Product;
 
 namespace Store.Api.Rest.Mapper
@@ -27,6 +28,8 @@ namespace Store.Api.Rest.Mapper
             CreateMap<Customer, GetAllCustomerDto>();
 
             CreateMap<AddCustomerCommandDto, Customer>();
+            
+            //CreateMap<AddOrderCommandDto, Order>();
 
         }
     }
