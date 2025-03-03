@@ -2,17 +2,26 @@
 <br />
 CQRS Pattern & Clean Architecture Design In Dot Net 6.0 based Api Project with Test units in xUnit tool & Duende Identity Server & RabbitMQ
 <br /><br />
-Project Structure :
-<br /><br />
+
+# Project Structure :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/structure.png?raw=true)
 
-Swagger page :
+<hr />
+
+# ERD :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/ERD.png?raw=true)
+
+<hr />
+
+# Swagger page :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/swagger.png?raw=true)
 
+<hr />
 
-Order Command Handler Code for e.g. :
+# Order Command Handler Code for e.g. :
 
 ```
     public class AddOrderCommandDto
@@ -131,14 +140,17 @@ Order Command Handler Code for e.g. :
     }
 ```
 
-Duende Identity Server :
+<hr />
+
+# Duende Identity Server :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
 
-<br />
-RabbitMQ with Docker :
+<hr />
+
+# RabbitMQ with Docker :
 
 ```
 docker pull rabbitmq:4.0.7-management
@@ -147,10 +159,14 @@ docker run -d --hostname myrabbit --name rabbit -p 5672:5672 -p 5673:5673 -p 156
 ```
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbitContainer.png?raw=true)
 
-Order Message has been sent to rabbitmq :
+<hr />
+
+# Order Message has been sent to rabbitmq :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbit.png?raw=true)
 
-Hangfire dashbourd :
+<hr />
+
+# Hangfire dashbourd :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/hangfire.png?raw=true)
