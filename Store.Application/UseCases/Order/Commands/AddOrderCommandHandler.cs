@@ -3,6 +3,7 @@ using MediatR;
 using Store.Core.Commands;
 using Store.Domain.DTOs;
 using Store.Domain.Enums;
+using Store.Infra.RabbitMQ;
 using Store.Infra.Sql.Repositories.OrderRepo;
 using Store.Shared.Tools;
 using System;
@@ -57,6 +58,9 @@ namespace Store.Application.UseCases.Order.Commands
             };
 
             await orderRepository.CreateAsync(order);
+
+            // Send order event success action message to RabbitMQ ...
+            Producer.Produce($"Order with number {order.OrderId} created for customer number {order.CustomerId}");
 
             return ResultDto<Unit>.ReturnData(Unit.Value, (int)EnumResponseStatus.OK, (int)EnumResultCode.Success, EnumResultCode.Success.GetDisplayName());
         }
