@@ -11,25 +11,6 @@ Swagger page :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/swagger.png?raw=true)
 
-Duende Identity Server :
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
-
-<br />
-RabbitMQ with Docker :
-
-```
-docker pull rabbitmq:4.0.7-management
-
-docker run -d --hostname myrabbit --name rabbit -p 5672:5672 -p 5673:5673 -p 15672:15672 rabbitmq:4.0.7-management
-```
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbitContainer.png?raw=true)
-
-Order Message has been sent to rabbitmq :
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbit.png?raw=true)
 
 Order Command Handler Code for e.g. :
 
@@ -149,3 +130,27 @@ Order Command Handler Code for e.g. :
         }
     }
 ```
+
+Duende Identity Server :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
+
+<br />
+RabbitMQ with Docker :
+
+```
+docker pull rabbitmq:4.0.7-management
+
+docker run -d --hostname myrabbit --name rabbit -p 5672:5672 -p 5673:5673 -p 15672:15672 rabbitmq:4.0.7-management
+```
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbitContainer.png?raw=true)
+
+Order Message has been sent to rabbitmq :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbit.png?raw=true)
+
+Hangfire dashbourd :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/hangfire.png?raw=true)
