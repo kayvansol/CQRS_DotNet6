@@ -2,6 +2,8 @@
 <br />
 CQRS Pattern & Clean Architecture Design In Dot Net 6.0 based Api Project with Test units in xUnit tool & Duende Identity Server & RabbitMQ
 <br /><br />
+Command Query Responsibility Segregation (CQRS) is a design pattern that segregates read and write operations for a data store into separate data models. This approach allows each model to be optimized independently and can improve the performance, scalability, and security of an application.
+<br /><br />
 
 # Project Structure :
 
@@ -9,19 +11,21 @@ CQRS Pattern & Clean Architecture Design In Dot Net 6.0 based Api Project with T
 
 <hr />
 
-# ERD :
+# ER Diagram :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/ERD.png?raw=true)
 
 <hr />
 
-# Swagger page :
+# Rest Api Swagger page :
+
+Simplify API development with open-source and professional tools, built to help you and your team efficiently design and document APIs at scale.
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/swagger.png?raw=true)
 
 <hr />
 
-# Order Command Handler Code for e.g. :
+# Order Command Handler Code :
 
 ```
     public class AddOrderCommandDto
@@ -144,6 +148,8 @@ CQRS Pattern & Clean Architecture Design In Dot Net 6.0 based Api Project with T
 
 # Test Class with xUnit :
 
+xUnit is a free, open source, community-focused unit testing tool for the .NET Framework.
+
 ```
     public class CategoryTestData
     {
@@ -218,6 +224,8 @@ CQRS Pattern & Clean Architecture Design In Dot Net 6.0 based Api Project with T
 
 # Duende Identity Server :
 
+The most flexible and standards-compliant OpenID Connect and OAuth 2.0 framework for ASP.NET Core.
+
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
@@ -235,12 +243,14 @@ docker run -d --hostname myrabbit --name rabbit -p 5672:5672 -p 5673:5673 -p 156
 
 <hr />
 
-# Order Message has been sent to rabbitmq :
+Order Message has been sent to rabbitmq :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbit.png?raw=true)
 
 <hr />
 
 # Hangfire dashbourd :
+
+An easy way to perform background processing in .NET and .NET Core applications. No Windows Service or separate process required.
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/hangfire.png?raw=true)
