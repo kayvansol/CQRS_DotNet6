@@ -232,6 +232,8 @@ Simplify API development with open-source and professional tools, built to help 
     }
 ```
 
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/test.png?raw=true)
+
 <hr />
 
 # Duende Identity Server :
@@ -239,6 +241,10 @@ Simplify API development with open-source and professional tools, built to help 
 The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** framework for ASP.NET Core.
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
+
+Two Factor Authentication :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/TwoFactor.png?raw=true)
 
 Duende Identity Server Admin Page :
 
