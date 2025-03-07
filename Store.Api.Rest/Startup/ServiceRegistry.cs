@@ -28,6 +28,7 @@ namespace Store.Api.Rest.Startup
             services.AddControllers();
 
             services.AddHostedService<GlobalTimer>();
+            services.AddHostedService<GlobalTimer2>();
 
             services.AddHttpContextAccessor();
 
