@@ -242,11 +242,11 @@ The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** f
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
 
-Two Factor Authentication :
+**Two Factor Authentication** :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/TwoFactor.png?raw=true)
 
-Duende Identity Server Admin Page :
+Duende Identity Server **Admin** Page :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
 
@@ -263,13 +263,13 @@ docker run -d --hostname myrabbit --name rabbit -p 5672:5672 -p 5673:5673 -p 156
 
 <hr />
 
-Order Message has been sent to rabbitmq :
+Order Message has been sent to RabbitMQ :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/rabbit.png?raw=true)
 
 <hr />
 
-# Hangfire dashbourd :
+# Hangfire Dashbourd :
 
 An easy way to perform **background processing** in .NET and .NET Core applications. No Windows Service or separate process required.
 
