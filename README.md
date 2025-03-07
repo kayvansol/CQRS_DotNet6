@@ -1,6 +1,6 @@
 # Dot Net & CQRS
 <br />
-CQRS Pattern & Clean Architecture Design In Dot Net 6.0 based Api Project with Test units in xUnit tool & Duende Identity Server & RabbitMQ
+CQRS Pattern & Clean Architecture Design In Dot Net 6.0 based Api Project with Test units in xUnit tool & Duende Identity Server with Two Factor Authentication & RabbitMQ
 <br /><br />
 
 **Command Query Responsibility Segregation (CQRS)** is a design pattern that segregates read and write operations for a data store into separate data models. This approach allows each model to be optimized independently and can improve the performance, scalability, and security of an application.
