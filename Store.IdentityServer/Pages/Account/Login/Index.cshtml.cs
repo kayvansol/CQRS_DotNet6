@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Store.IdentityServer.Pages.Account.TwoFactor;
+using System.Net.Mail;
 
 namespace SsoSamples.IdentityServer.Pages.Login;
 
@@ -93,27 +95,6 @@ public class Index : PageModel
             if (_users.ValidateCredentials(Input.Username, Input.Password))
             {
                 var user = _users.FindByUsername(Input.Username);
-                await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username, clientId: context?.Client.ClientId));
-
-                // only set explicit expiration here if user chooses "remember me". 
-                // otherwise we rely upon expiration configured in cookie middleware.
-                AuthenticationProperties props = null;
-                if (LoginOptions.AllowRememberLogin && Input.RememberLogin)
-                {
-                    props = new AuthenticationProperties
-                    {
-                        IsPersistent = true,
-                        ExpiresUtc = DateTimeOffset.UtcNow.Add(LoginOptions.RememberMeLoginDuration)
-                    };
-                };
-
-                // issue authentication cookie with subject ID and username
-                var isuser = new IdentityServerUser(user.SubjectId)
-                {
-                    DisplayName = user.Username
-                };
-
-                await HttpContext.SignInAsync(isuser, props);
 
                 if (context != null)
                 {
@@ -125,7 +106,42 @@ public class Index : PageModel
                     }
 
                     // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
-                    return Redirect(Input.ReturnUrl);
+                    //return Redirect(Input.ReturnUrl);
+
+                    /*
+                     
+                    // Sending an email to user's email address inside User.Claims ...
+                    Setting setting = new()
+                    {
+                        SmtpServer = "smtp.google.com", 
+                        SenderAddress = "",
+                        Username = "",
+                        Password = "",
+                        SmtpPort = 587 // also tried 465 587
+                    };
+
+                    using (MailMessage mail = new MailMessage())
+                    {
+                        MailAddress senderAddress = new MailAddress(setting.SenderAddress);
+
+                        mail.From = senderAddress;
+                        mail.To.Add(user.Claims.First(x=>x.Type == "email").Value);
+
+                        mail.Subject = "Two-Factor Code";
+                        mail.IsBodyHtml = true;
+                        mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                        mail.Body = "746894";
+                        mail.BodyEncoding = System.Text.Encoding.UTF8;
+
+                        Sender sender = new Sender(setting);
+
+                        //await sender.Send(mail);
+
+                    }
+
+                    */
+
+                    return RedirectToPage("/Account/TwoFactor/Index", Input);
                 }
 
                 // request for a local page
