@@ -250,6 +250,16 @@ Duende Identity Server **Admin** Page :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
 
+**Seq** is the self-hosted search, analysis, and alerting server built for structured log data.
+
+Sink Duende Identity Server **Event Logs** to the avaiable Seq Server on Docker :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/seq.png?raw=true)
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/seq1.png?raw=true)
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/seq2.png?raw=true)
+
 <hr />
 
 # RabbitMQ with Docker :
