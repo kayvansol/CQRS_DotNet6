@@ -156,6 +156,27 @@ Simplify API development with open-source and professional tools, built to help 
     }
 ```
 
+```
+    public class BaseController : Controller
+    {
+        private IMediator mediator;
+
+        protected IMediator Mediator => mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+    }
+```
+
+```
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrderController : BaseController
+    {
+        [AllowAnonymous]
+        [HttpPost("InsertOrder")]
+        public async Task<ResultDto<Unit>> InsertOrder(AddOrderCommand command, CancellationToken cancellationToken) => await Mediator.Send(command, cancellationToken);
+
+    }
+```
+
 <hr />
 
 # Test Class with xUnit :
