@@ -54,9 +54,10 @@ namespace Store.IdentityServer.Pages.Account.TwoFactor
         {
             if (Input != null)
             {
-                if (!(Input.TwoFactor == "746894"))
+                if (Input.TwoFactor != "746894")
                 {
                     ModelState.AddModelError(string.Empty, LoginOptions.InvalidTwoFactorErrorMessage);
+
                     return Page();
                 }
             }
@@ -70,6 +71,7 @@ namespace Store.IdentityServer.Pages.Account.TwoFactor
             // only set explicit expiration here if user chooses "remember me". 
             // otherwise we rely upon expiration configured in cookie middleware.
             AuthenticationProperties props = null;
+
             if (LoginOptions.AllowRememberLogin && Input.RememberLogin)
             {
                 props = new AuthenticationProperties
@@ -89,10 +91,8 @@ namespace Store.IdentityServer.Pages.Account.TwoFactor
 
             if (context != null)
             {
-
                 // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
                 return Redirect(Input.ReturnUrl);
-
             }
 
             // request for a local page

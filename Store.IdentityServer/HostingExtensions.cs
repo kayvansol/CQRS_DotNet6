@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Services;
 using Serilog;
 using SsoSamples.IdentityServer;
 
@@ -13,16 +14,22 @@ internal static class HostingExtensions
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
 
+        builder.Services.AddTransient<IEventSink, SeqEventSink>();
+
         builder.Services.AddIdentityServer(options =>
             {
                 // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
+
                 options.EmitStaticAudienceClaim = true;
+
+                options.Events.RaiseSuccessEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseErrorEvents = true;
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
             .AddTestUsers(TestUsers.Users);
-
 
         return builder.Build();
     }
