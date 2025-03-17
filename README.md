@@ -257,7 +257,7 @@ Simplify API development with open-source and professional tools, built to help 
 
 <hr />
 
-# Duende Identity Server :
+# Single Sign On (SSO) with Duende Identity Server :
 
 The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** framework for ASP.NET Core.
 
