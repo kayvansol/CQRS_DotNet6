@@ -261,6 +261,12 @@ Simplify API development with open-source and professional tools, built to help 
 
 The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** framework for ASP.NET Core.
 
+**Register a new User** :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/Register.png?raw=true)
+
+**Login** :
+
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
 
 **Two Factor Authentication** :
@@ -270,6 +276,27 @@ The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** f
 Duende Identity Server **Admin** Page :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
+
+**Migrations** to use SQL Server for User Registeration and Login process :
+```
+add-Migration init -Context ApplicationDbContext
+
+Update-Database -Context ApplicationDbContext
+
+
+add-Migration init -Context ConfigurationDbContext
+
+Update-Database -Context ConfigurationDbContext
+
+
+add-Migration init -Context PersistedGrantDbContext
+
+Update-Database -Context PersistedGrantDbContext
+```
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/StoreAccount.png?raw=true)
+
+<hr />
 
 **Seq** is the self-hosted search, analysis, and alerting server built for structured log data.
 
