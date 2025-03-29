@@ -19,10 +19,13 @@ namespace Store.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
+
             _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
             var resutlString = await _client.GetStringAsync("/WeatherForecast");
 
             var result = JsonConvert.DeserializeObject<List<WeatherForecast>>(resutlString);
+
             return View(result);
         }
         public IActionResult Logout()

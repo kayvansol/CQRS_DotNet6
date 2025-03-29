@@ -6,6 +6,7 @@ using Duende.IdentityServer.Stores;
 using Duende.IdentityServer.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SsoSamples.IdentityServer.Pages;
@@ -19,7 +20,7 @@ namespace Store.IdentityServer.Pages.Account.TwoFactor
         [BindProperty]
         public InputModel Input { get; set; }
 
-        private readonly TestUserStore _users;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IEventService _events;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
@@ -33,11 +34,9 @@ namespace Store.IdentityServer.Pages.Account.TwoFactor
             IAuthenticationSchemeProvider schemeProvider,
             IIdentityProviderStore identityProviderStore,
             IEventService events,
-            TestUserStore users = null)
+            SignInManager<ApplicationUser> signInManager)
         {
-            // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-            _users = users ?? throw new Exception("Please call 'AddTestUsers(TestUsers.Users)' on the IIdentityServerBuilder in Startup or remove the TestUserStore from the AccountController.");
-
+            _signInManager = signInManager;
             _interaction = interaction;
             _schemeProvider = schemeProvider;
             _identityProviderStore = identityProviderStore;
@@ -64,9 +63,10 @@ namespace Store.IdentityServer.Pages.Account.TwoFactor
 
             var context = await _interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
 
-            var user = _users.FindByUsername(Input.Username);
+            // find user by username
+            var user = await _signInManager.UserManager.FindByNameAsync(Input.Username);
 
-            await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username, clientId: context?.Client.ClientId));
+            await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
 
             // only set explicit expiration here if user chooses "remember me". 
             // otherwise we rely upon expiration configured in cookie middleware.
@@ -82,9 +82,9 @@ namespace Store.IdentityServer.Pages.Account.TwoFactor
             };
 
             // issue authentication cookie with subject ID and username
-            var isuser = new IdentityServerUser(user.SubjectId)
+            var isuser = new IdentityServerUser(user.Id)
             {
-                DisplayName = user.Username
+                DisplayName = user.UserName
             };
 
             await HttpContext.SignInAsync(isuser, props);

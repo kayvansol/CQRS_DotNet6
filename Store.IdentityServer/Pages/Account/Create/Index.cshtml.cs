@@ -1,15 +1,19 @@
 // Copyright (c) Duende Software. All rights reserved.
 // See LICENSE in the project root for license information.
 
+using Duende.IdentityModel;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.DependencyInjection;
 using SsoSamples.IdentityServer.Pages;
+using System.Security.Claims;
 
 namespace Store.IdentityServer.Pages.Create;
 
@@ -17,20 +21,23 @@ namespace Store.IdentityServer.Pages.Create;
 [AllowAnonymous]
 public class Index : PageModel
 {
-    private readonly TestUserStore _users;
+    private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IIdentityServerInteractionService _interaction;
+    private readonly UserManager<ApplicationUser> _userManager;
 
     [BindProperty]
     public InputModel Input { get; set; } = default!;
 
     public Index(
         IIdentityServerInteractionService interaction,
-        TestUserStore? users = null)
+        SignInManager<ApplicationUser> signInManager,
+        UserManager<ApplicationUser> userManager)
     {
-        // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-        _users = users ?? throw new InvalidOperationException("Please call 'AddTestUsers(TestUsers.Users)' on the IIdentityServerBuilder in Startup or remove the TestUserStore from the AccountController.");
-            
+        _signInManager = signInManager;
+
         _interaction = interaction;
+
+        _userManager = userManager;
     }
 
     public IActionResult OnGet(string? returnUrl)
@@ -38,7 +45,7 @@ public class Index : PageModel
         Input = new InputModel { ReturnUrl = returnUrl };
         return Page();
     }
-        
+
     public async Task<IActionResult> OnPost()
     {
         // check if we are in the context of an authorization request
@@ -71,19 +78,42 @@ public class Index : PageModel
             }
         }
 
-        if (_users.FindByUsername(Input.Username) != null)
+        // find user by username
+        var user = await _signInManager.UserManager.FindByNameAsync(Input.Username);
+
+        if (user != null)
         {
             ModelState.AddModelError("Input.Username", "Invalid username");
         }
 
         if (ModelState.IsValid)
         {
-            var user = _users.CreateUser(Input.Username, Input.Password, Input.Name, Input.Email);
+
+            string subjectId = Guid.NewGuid().ToString().ToUpper();
+
+            var identityUser = new ApplicationUser()
+            {
+                Id = subjectId,
+                UserName = Input.Username,
+                PasswordHash = Input.Password,
+                Email = Input.Email,
+                FirstName = Input.Name ?? "",
+                LastName = Input.LastName ?? "",
+                Mobile = Input.Mobile ?? ""
+            };
+
+            List<Claim> claims = new List<Claim>();
+
+            claims.Add(new Claim(JwtClaimTypes.Email,Input.Email));
+            claims.Add(new Claim(JwtClaimTypes.Role, "admin"));
+
+            _userManager.CreateAsync(identityUser, Input.Password).Wait();
+            _userManager.AddClaimsAsync(identityUser, claims).Wait();
 
             // issue authentication cookie with subject ID and username
-            var isuser = new IdentityServerUser(user.SubjectId)
+            var isuser = new IdentityServerUser(subjectId)
             {
-                DisplayName = user.Username
+                DisplayName = Input.Username
             };
 
             await HttpContext.SignInAsync(isuser);

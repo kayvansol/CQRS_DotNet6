@@ -1,6 +1,20 @@
 ﻿using Store.IdentityServer;
 using Serilog;
 
+
+/*static void Main(string[] args)
+{
+    CreateHostBuilder(args).Build().Run();
+}
+
+static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Startup>();
+        });
+*/
+
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();
@@ -16,7 +30,7 @@ try
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
 
-    var app = builder
+var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
     
@@ -24,7 +38,15 @@ try
 }
 catch (Exception ex)
 {
+    //Log.Fatal(ex, "Unhandled exception");
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
+
     Log.Fatal(ex, "Unhandled exception");
+    //return 1;
 }
 finally
 {

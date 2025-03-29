@@ -1,7 +1,7 @@
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Services;
-using IdentityModel;
+using Duende.IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -64,9 +64,19 @@ public class Index : PageModel
             // this captures necessary info from the current logged in user
             // this can still return null if there is no context needed
             LogoutId ??= await _interaction.CreateLogoutContextAsync();
-                
-            // delete local authentication cookie
+
+            // delete local authentication cookie .AspNetCore.Cookies .AspNetCore.Identity.Application
             await HttpContext.SignOutAsync();
+
+            if (Request.Cookies[".AspNetCore.Cookies"] != null)
+            {
+                Response.Cookies.Delete(".AspNetCore.Cookies");
+            }
+
+            if (Request.Cookies[".AspNetCore.Identity.Application"] != null)
+            {
+                Response.Cookies.Delete(".AspNetCore.Identity.Application");
+            }
 
             // raise the logout event
             await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));

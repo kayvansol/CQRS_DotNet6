@@ -1,0 +1,18 @@
+
+
+
+add-Migration init -Context ApplicationDbContext
+
+Update-Database -Context ApplicationDbContext
+
+
+
+add-Migration init -Context ConfigurationDbContext
+
+Update-Database -Context ConfigurationDbContext
+
+
+
+add-Migration init -Context PersistedGrantDbContext
+
+Update-Database -Context PersistedGrantDbContext

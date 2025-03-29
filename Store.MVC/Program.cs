@@ -15,10 +15,10 @@ builder.Services.AddAuthentication(c =>
     c.ClientSecret = "secret";
     c.ResponseType = "code";
     c.Scope.Clear();
-    c.Scope.Add("openid");
-    c.Scope.Add("profile");
     c.Scope.Add("api_rest");
-    c.Scope.Add("offline_access");
+    c.Scope.Add("profile"); 
+    c.Scope.Add("openid");
+    //c.Scope.Add("offline_access");
     c.GetClaimsFromUserInfoEndpoint = true;
     c.SaveTokens = true;
 });

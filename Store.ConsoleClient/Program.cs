@@ -21,8 +21,9 @@ static async Task main()
     var tokenResponse = await identityClient.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
     {
         Address = discovery.TokenEndpoint,
-        ClientId = "console_client",
-        ClientSecret = "secret",
+        //ClientId = "console_client",
+        ClientId = "oauthClient",
+        ClientSecret = "SuperSecretPassword",
         Scope = "api_rest"
     });
 

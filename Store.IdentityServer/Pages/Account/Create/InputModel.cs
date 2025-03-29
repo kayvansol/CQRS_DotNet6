@@ -14,7 +14,9 @@ public class InputModel
     public string? Password { get; set; }
 
     public string? Name { get; set; }
+    public string? LastName { get; set; }
     public string? Email { get; set; }
+    public string? Mobile { get; set; }
 
     public string? ReturnUrl { get; set; }
 
