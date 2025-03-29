@@ -156,6 +156,27 @@ Simplify API development with open-source and professional tools, built to help 
     }
 ```
 
+```
+    public class BaseController : Controller
+    {
+        private IMediator mediator;
+
+        protected IMediator Mediator => mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+    }
+```
+
+```
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrderController : BaseController
+    {
+        [AllowAnonymous]
+        [HttpPost("InsertOrder")]
+        public async Task<ResultDto<Unit>> InsertOrder(AddOrderCommand command, CancellationToken cancellationToken) => await Mediator.Send(command, cancellationToken);
+
+    }
+```
+
 <hr />
 
 # Test Class with xUnit :
@@ -236,7 +257,7 @@ Simplify API development with open-source and professional tools, built to help 
 
 <hr />
 
-# Duende Identity Server :
+# Single Sign On (SSO) with Duende Identity Server :
 
 The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** framework for ASP.NET Core.
 
@@ -249,6 +270,16 @@ The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** f
 Duende Identity Server **Admin** Page :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
+
+**Seq** is the self-hosted search, analysis, and alerting server built for structured log data.
+
+Sink Duende Identity Server **Event Logs** to the avaiable Seq Server on Docker :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/seq.png?raw=true)
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/seq1.png?raw=true)
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/seq2.png?raw=true)
 
 <hr />
 
