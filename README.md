@@ -273,6 +273,10 @@ The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** f
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/TwoFactor.png?raw=true)
 
+**Swagger Authentication** :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity3.png?raw=true)
+
 Duende Identity Server **Admin** Page :
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
