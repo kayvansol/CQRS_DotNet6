@@ -294,6 +294,11 @@ add-Migration init -Context PersistedGrantDbContext
 Update-Database -Context PersistedGrantDbContext
 ```
 
+Running line below inside ConfigurePipeline at HostingExtensions.cs to insert some initial data in the identity database :
+```
+InitializeDbTestData(app);
+```
+
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/StoreAccount.png?raw=true)
 
 <hr />
