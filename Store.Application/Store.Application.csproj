@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Store.Shared\Store.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Order\Queries\" />
-  </ItemGroup>
-
 </Project>
