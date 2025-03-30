@@ -1,20 +1,6 @@
 ﻿using Store.IdentityServer;
 using Serilog;
 
-
-/*static void Main(string[] args)
-{
-    CreateHostBuilder(args).Build().Run();
-}
-
-static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Startup>();
-        });
-*/
-
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();

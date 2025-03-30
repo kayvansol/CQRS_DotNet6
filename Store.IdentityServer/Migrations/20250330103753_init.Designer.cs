@@ -12,7 +12,7 @@ using Store.IdentityServer;
 namespace Store.IdentityServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250312214133_init")]
+    [Migration("20250330103753_init")]
     partial class init
     {
         /// <inheritdoc />
