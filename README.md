@@ -27,6 +27,16 @@ It achieves this by separating the application into different layers that have d
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/ERD.png?raw=true)
 
+Run Line below inside Store.Infra.Sql project to generate the **StoreContext** :
+```
+Scaffold-DbContext "Data Source=.;Initial Catalog=Store;Integrated Security=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Context -Force
+```
+
+For the **LogDbContext** :
+```
+Scaffold-DbContext "Data Source=.;Initial Catalog=LogDB;Integrated Security=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir LogContext -Force
+```
+
 <hr />
 
 # Rest Api Swagger page :
