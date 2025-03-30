@@ -23,7 +23,17 @@ It achieves this by separating the application into different layers that have d
 
 <hr />
 
-# ER Diagram :
+# Databases :
+
+You can create the databases from scripts placed inside **Store.Infra.Sql** project :
+```
+StoreDatabaseScript.sql
+LogDbDatabaseScript.sql
+```
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/Databases.png?raw=true)
+
+# ERD
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/ERD.png?raw=true)
 
