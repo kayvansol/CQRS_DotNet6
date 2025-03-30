@@ -261,26 +261,6 @@ Simplify API development with open-source and professional tools, built to help 
 
 The most flexible and standards-compliant **OpenID Connect** and **OAuth 2.0** framework for ASP.NET Core.
 
-**Register a new User** :
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/Register.png?raw=true)
-
-**Login** :
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
-
-**Two Factor Authentication** :
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/TwoFactor.png?raw=true)
-
-**Swagger Authentication** :
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity3.png?raw=true)
-
-Duende Identity Server **Admin** Page :
-
-![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
-
 **Migrations** to use SQL Server for User Registeration and Login process :
 ```
 add-Migration init -Context ApplicationDbContext
@@ -304,6 +284,26 @@ InitializeDbTestData(app);
 ```
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/StoreAccount.png?raw=true)
+
+**Register a new User** :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/Register.png?raw=true)
+
+**Login** :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity.png?raw=true)
+
+**Two Factor Authentication** :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/TwoFactor.png?raw=true)
+
+**Swagger Authentication** :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity3.png?raw=true)
+
+Duende Identity Server **Admin** Page :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/identity2.png?raw=true)
 
 <hr />
 
