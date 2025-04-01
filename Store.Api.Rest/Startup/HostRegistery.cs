@@ -1,5 +1,4 @@
-﻿using Store.Api.Rest.Logging;
-
+﻿
 namespace Store.Api.Rest.Startup
 {
     public static class HostRegistery

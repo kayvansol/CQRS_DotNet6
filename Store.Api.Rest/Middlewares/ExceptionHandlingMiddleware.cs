@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text;
-using Store.Api.Rest.Logging;
-
+﻿
 namespace Store.Api.Rest.Middlewares
 {
     public class ExceptionHandlingMiddleware : IMiddleware

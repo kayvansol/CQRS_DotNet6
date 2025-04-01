@@ -7,6 +7,7 @@ global using System.Diagnostics;
 global using System.Text;
 global using Serilog;
 global using Hangfire;
+global using Store.Api.Rest.Logging;
 global using Store.Infra.Sql.LogContext;
 global using Store.Domain.Log;
 global using Store.Domain.Objects;

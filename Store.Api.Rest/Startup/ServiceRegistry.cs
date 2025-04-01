@@ -2,7 +2,6 @@
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Store.Api.Rest.Attributes;
-using Store.Api.Rest.Logging;
 using Store.Api.Rest.Middlewares;
 using Store.Api.Rest.Services;
 using Store.Api.Rest.Mapper;
