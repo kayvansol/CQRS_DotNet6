@@ -51,7 +51,7 @@ Scaffold-DbContext "Data Source=.;Initial Catalog=LogDB;Integrated Security=True
 
 <hr />
 
-# Rest Api Swagger page :
+# Rest Apis Swagger page :
 
 Simplify API development with open-source and professional tools, built to help you and your team efficiently design and document APIs at scale.
 
@@ -59,7 +59,7 @@ Simplify API development with open-source and professional tools, built to help 
 
 <hr />
 
-# Order Command Handler Code :
+# Order Command Handler Code (for e.g.):
 
 ```
     public class AddOrderCommandDto
@@ -299,6 +299,8 @@ add-Migration init -Context PersistedGrantDbContext
 
 Update-Database -Context PersistedGrantDbContext
 ```
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/Migrations.png?raw=true)
 
 Running line below inside ConfigurePipeline at HostingExtensions.cs to insert some initial data in the identity database :
 ```
