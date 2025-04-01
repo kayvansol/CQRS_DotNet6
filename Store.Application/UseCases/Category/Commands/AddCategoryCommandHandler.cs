@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using Store.Core.Commands;
-using Store.Domain.DTOs;
-using Store.Domain.Enums;
-using Store.Infra.Sql.Repositories.CategoryRepo;
-using Store.Shared.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Store.Infra.Sql.Repositories.CategoryRepo;
 
 namespace Store.Application.UseCases.Category.Commands
 {

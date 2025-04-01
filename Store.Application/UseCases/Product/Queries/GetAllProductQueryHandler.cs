@@ -1,16 +1,5 @@
-﻿using AutoMapper;
-using MediatR;
-using Store.Core.Queries;
-using Store.Domain.DTOs;
-using Store.Domain.DTOs.Product;
-using Store.Domain.Enums;
+﻿using Store.Domain.DTOs.Product;
 using Store.Infra.Sql.Repositories.ProductRepo;
-using Store.Shared.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Store.Application.UseCases.Product.Queries
 {

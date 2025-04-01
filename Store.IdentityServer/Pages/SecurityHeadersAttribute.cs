@@ -3,7 +3,6 @@
 
 
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SsoSamples.IdentityServer.Pages;
 

@@ -1,6 +1,4 @@
-﻿using MediatR;
-using Store.Domain.DTOs;
-using Store.Domain.DTOs.Product;
+﻿using Store.Domain.DTOs.Product;
 
 namespace Store.Core.Queries
 {

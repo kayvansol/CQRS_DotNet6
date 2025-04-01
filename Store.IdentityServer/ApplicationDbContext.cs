@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace Store.IdentityServer
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>    

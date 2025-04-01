@@ -1,6 +1,4 @@
 ﻿using Duende.IdentityServer.Events;
-using Duende.IdentityServer.Services;
-using Serilog;
 using Serilog.Core;
 
 namespace Store.IdentityServer

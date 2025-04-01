@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using Store.Api.Rest.Mapper;
-using Store.Domain.Entities;
-using Store.Infra.Sql.Context;
-using Store.Infra.Sql.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Store.Api.Rest.Mapper;
 
 namespace Store.Test.Utils
 {

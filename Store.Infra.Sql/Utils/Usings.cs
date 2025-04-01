@@ -1,0 +1,10 @@
+﻿global using AutoMapper;
+global using Store.Domain;
+global using Store.Domain.DTOs.Category;
+global using Store.Domain.Extensions;
+global using Store.Infra.Sql.Context;
+global using Microsoft.EntityFrameworkCore.Query;
+global using Store.Domain.Entities;
+global using System.Linq.Expressions;
+global using Microsoft.EntityFrameworkCore;
+global using static Store.Domain.Extensions.PaginationExtension;

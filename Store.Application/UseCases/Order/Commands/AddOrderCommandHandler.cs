@@ -1,16 +1,5 @@
-﻿using AutoMapper;
-using MediatR;
-using Store.Core.Commands;
-using Store.Domain.DTOs;
-using Store.Domain.Enums;
-using Store.Infra.RabbitMQ;
+﻿using Store.Infra.RabbitMQ;
 using Store.Infra.Sql.Repositories.OrderRepo;
-using Store.Shared.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Store.Application.UseCases.Order.Commands
 {

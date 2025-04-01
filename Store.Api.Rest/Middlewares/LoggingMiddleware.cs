@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using Store.Api.Rest.Logging;
+﻿using Store.Api.Rest.Logging;
 
 namespace Store.Api.Rest.Middlewares
 {

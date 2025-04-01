@@ -1,10 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Store.Core.Commands;
-using Store.Domain.DTOs;
-
+﻿
 namespace Store.Api.Rest.Controllers
 {
     [Route("api/[controller]")]

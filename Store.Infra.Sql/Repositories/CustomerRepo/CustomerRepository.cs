@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Store.Domain;
-using Store.Domain.DTOs.Customer;
-using Store.Infra.Sql.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Store.Domain.DTOs.Customer;
 
 namespace Store.Infra.Sql.Repositories.CustomerRepo
 {

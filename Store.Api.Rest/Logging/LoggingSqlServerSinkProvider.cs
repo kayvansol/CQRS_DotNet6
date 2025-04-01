@@ -1,7 +1,5 @@
 ﻿using Serilog.Core;
 using Serilog.Events;
-using Store.Infra.Sql.LogContext;
-using Store.Domain.Log;
 
 namespace Store.Api.Rest.Logging
 {

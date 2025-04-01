@@ -1,7 +1,4 @@
 ﻿
-
-using FluentValidation;
-
 namespace Store.Api.Rest.Middlewares
 {
     public class ValidationMiddleware<TRequest> : IMiddleware

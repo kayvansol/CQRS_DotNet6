@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Store.Domain;
-using Store.Domain.DTOs.Category;
-using Store.Domain.DTOs.Customer;
-using Store.Domain.DTOs.Order;
-using Store.Domain.DTOs.Product;
-
+﻿
 namespace Store.Api.Rest.Mapper
 {
     public class MapperProfile : Profile

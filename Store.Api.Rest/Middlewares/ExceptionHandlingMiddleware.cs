@@ -1,11 +1,6 @@
-﻿
-using Newtonsoft.Json;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Text;
-using Store.Domain;
 using Store.Api.Rest.Logging;
-using Store.Domain.Objects;
-using FluentValidation;
 
 namespace Store.Api.Rest.Middlewares
 {

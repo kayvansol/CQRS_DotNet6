@@ -1,8 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Store.Api.Rest.Attributes;
-
+﻿
 namespace Store.Api.Rest.Controllers
 {
     //[ServiceFilter(typeof(PermissionAttribute))]

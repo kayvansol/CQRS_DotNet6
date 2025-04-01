@@ -1,5 +1,4 @@
-﻿using Hangfire;
-using Store.Api.Rest.Middlewares;
+﻿using Store.Api.Rest.Middlewares;
 using Store.Api.Rest.Services;
 
 namespace Store.Api.Rest.Startup
@@ -9,17 +8,27 @@ namespace Store.Api.Rest.Startup
         public static void Register(this WebApplication webApplication)
         {
 
+            #region Development
+
             // Configure the HTTP request pipeline.
             if (webApplication.Environment.IsDevelopment())
             {
 
             }
 
+            #endregion
+
+            #region Middlewares
+
             //webApplication.UseMiddleware(typeof(ValidationMiddleware<>)); 
 
             webApplication.UseMiddleware(typeof(LoggingMiddleware));
 
             webApplication.UseMiddleware(typeof(ExceptionHandlingMiddleware));
+
+            #endregion
+
+            #region Swagger
 
             webApplication.UseSwagger();
 
@@ -35,6 +44,10 @@ namespace Store.Api.Rest.Startup
                 options.OAuthUsePkce();
             });
 
+            #endregion
+
+            #region Hangfire
+
             var interval = int.Parse(webApplication.Configuration["HangFireSettings:interval"]);
 
             webApplication.UseHangfireDashboard();
@@ -46,6 +59,8 @@ namespace Store.Api.Rest.Startup
 
             RecurringJob.AddOrUpdate<ICronJobs>(x => x.GetRandomNumber(),$"0/{interval} * * * * *" , TimeZoneInfo.Local, "randomqueue"
                 );
+
+            #endregion
 
         }
     }

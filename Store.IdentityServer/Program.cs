@@ -1,11 +1,16 @@
 ﻿using Store.IdentityServer;
-using Serilog;
+
+#region Logger
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();
 
 Log.Information("Starting up");
+
+#endregion
+
+#region Services & Pipeline
 
 try
 {
@@ -16,16 +21,16 @@ try
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
 
-var app = builder
-        .ConfigureServices()
-        .ConfigurePipeline();
+    var app = builder.ConfigureServices().ConfigurePipeline();
     
     app.Run();
+
 }
 catch (Exception ex)
 {
     //Log.Fatal(ex, "Unhandled exception");
     string type = ex.GetType().Name;
+
     if (type.Equals("StopTheHostException", StringComparison.Ordinal))
     {
         throw;
@@ -39,3 +44,5 @@ finally
     Log.Information("Shut down complete");
     Log.CloseAndFlush();
 }
+
+#endregion

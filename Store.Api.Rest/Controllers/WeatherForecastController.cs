@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 
 namespace Store.Api.Rest.Controllers
 {

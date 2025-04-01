@@ -1,6 +1,4 @@
-﻿using Store.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Store.Domain.DTOs
 {

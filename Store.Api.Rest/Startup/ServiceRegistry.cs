@@ -1,22 +1,12 @@
-﻿using AutoMapper;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Store.Api.Rest.Attributes;
 using Store.Api.Rest.Logging;
 using Store.Api.Rest.Middlewares;
 using Store.Api.Rest.Services;
-using Store.Infra.Sql.LogContext;
-using Store.Domain.Objects;
 using Store.Api.Rest.Mapper;
 using Store.Infra.Sql.Context;
-using Hangfire;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 //using Microsoft.EntityFrameworkCore.InMemory;
 
 namespace Store.Api.Rest.Startup
@@ -25,12 +15,23 @@ namespace Store.Api.Rest.Startup
     {
         public static void Register(this IServiceCollection services, IConfiguration configuration)
         {
+
+            #region Public
+
             services.AddControllers();
+
+            services.AddHttpContextAccessor();
+
+            #endregion
+
+            #region Hosted Service
 
             services.AddHostedService<GlobalTimer>();
             services.AddHostedService<GlobalTimer2>();
 
-            services.AddHttpContextAccessor();
+            #endregion
+
+            #region DbContext
 
             // Scaffold-DbContext "Data Source=.;Initial Catalog=LogDB;Integrated Security=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Context -Force
 
@@ -44,9 +45,17 @@ namespace Store.Api.Rest.Startup
 
             services.AddScoped<LogDbContext>();
 
+            #endregion
+
+            #region Validators
+
             services.AddValidatorsFromAssembly(typeof(Store.Core.InjectCore).GetTypeInfo().Assembly);
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            #endregion
+
+            #region Dependency Injection
 
             services.AddTransient(typeof(PermissionAttribute));
 
@@ -60,6 +69,10 @@ namespace Store.Api.Rest.Startup
 
             services.AddScoped(typeof(LoggingBehaviour<,>));
 
+            #endregion
+
+            #region Auto Mapper
+
             // Auto Mapper Config ...
 
             var mapperConfig = new MapperConfiguration(c =>
@@ -71,50 +84,29 @@ namespace Store.Api.Rest.Startup
 
             services.AddSingleton(mapper);
 
-            // Swagger 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            services.AddEndpointsApiExplorer();
+            #endregion
 
-            /*services.AddSwaggerGen(a =>
-            {
-                a.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-                a.AddSecurityRequirement(new OpenApiSecurityRequirement{{
-                new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference
-                    {
-                        Type =  ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                Array.Empty<string>()
-                    }
-                });
-            });*/
-
-
+            #region Hangfire
 
             services.AddScoped<ICronJobs, CronJobs>();
 
-            services.AddHangfire(config => config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170).UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(configuration.GetSection("ApplicationOptions:HangFireConnectionString").Value, new Hangfire.SqlServer.SqlServerStorageOptions
-            {
-                CommandBatchMaxTimeout = TimeSpan.FromMinutes(6),
-                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(6),
-                QueuePollInterval = TimeSpan.Zero,
-                UseRecommendedIsolationLevel = true,
-                DisableGlobalLocks = true,
-                //CountersAggregateInterval = TimeSpan.FromMinutes(5)
-            })
+            services.AddHangfire(config => config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170).UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(configuration.GetSection("ApplicationOptions:HangFireConnectionString").Value, new         Hangfire.SqlServer.SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(6),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(6),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    DisableGlobalLocks = true,
+                    //CountersAggregateInterval = TimeSpan.FromMinutes(5)
+                })
             );
 
             services.AddHangfireServer(option => option.Queues = new[] { "datetimequeue", "randomqueue" });
 
+
+            #endregion
+
+            #region Authentication & Authorization
 
             services.AddAuthorization(c =>
             {
@@ -136,6 +128,13 @@ namespace Store.Api.Rest.Startup
                     
                 });
 
+            #endregion
+
+            #region Swagger
+
+            // Swagger 
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(options =>
             {
@@ -160,32 +159,11 @@ namespace Store.Api.Rest.Startup
 
                 options.OperationFilter<AuthorizeCheckOperationFilter>();
             });
+
+            #endregion
+
         }
 
-    }
-
-    public class AuthorizeCheckOperationFilter : IOperationFilter
-    {
-        public void Apply(OpenApiOperation operation, OperationFilterContext context)
-        {
-            var hasAuthorize = context.MethodInfo.DeclaringType.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any() ||
-                               context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();
-
-            if (hasAuthorize)
-            {
-                operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
-                operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
-
-                operation.Security = new List<OpenApiSecurityRequirement>
-                {
-                    new OpenApiSecurityRequirement
-                    {
-                        [new OpenApiSecurityScheme {Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}}]
-                            = new[] { "api_rest" }
-                    }
-                };
-            }
-        }
     }
 
 }

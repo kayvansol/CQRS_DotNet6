@@ -1,12 +1,3 @@
-using Duende.IdentityServer.EntityFramework.DbContexts;
-using Duende.IdentityServer.EntityFramework.Mappers;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Serilog;
-using SsoSamples.IdentityServer;
-using System.Reflection;
 
 namespace Store.IdentityServer;
 

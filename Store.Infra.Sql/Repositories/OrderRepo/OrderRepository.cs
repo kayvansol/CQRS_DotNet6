@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using Store.Domain;
-using Store.Infra.Sql.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Store.Infra.Sql.Repositories.OrderRepo
 {
     public class OrderRepository : Repository<Order, int>, IOrderRepository

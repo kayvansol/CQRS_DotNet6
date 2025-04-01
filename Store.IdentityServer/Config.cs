@@ -1,10 +1,7 @@
-﻿using Duende.IdentityModel;
-using Duende.IdentityServer;
-using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Test;
-using System.Security.Claims;
-
+﻿
 namespace Store.IdentityServer;
+
+#region Clients
 
 internal class Clients
 {
@@ -70,6 +67,10 @@ internal class Clients
     }
 }
 
+#endregion
+
+#region Resources
+
 internal class Resources
 {
     public static IEnumerable<IdentityResource> GetIdentityResources()
@@ -114,6 +115,10 @@ internal class Resources
     }
 }
 
+#endregion
+
+#region Users
+
 internal class Users
 {
     public static List<TestUser> Get()
@@ -133,3 +138,5 @@ internal class Users
             };
     }
 }
+
+#endregion

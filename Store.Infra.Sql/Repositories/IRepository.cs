@@ -1,12 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
-using Store.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Store.Infra.Sql.Repositories
 {
     public interface IRepository<Entity, Key> where Entity : BaseEntity<Key> where Key : notnull

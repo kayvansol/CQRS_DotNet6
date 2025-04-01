@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using Store.Domain.Entities;
-using Store.Infra.Sql.Context;
-using System.Linq.Expressions;
-
+﻿
 namespace Store.Infra.Sql.Repositories
 {
     public class Repository<Entity, Key> : IDisposable, IRepository<Entity, Key>
