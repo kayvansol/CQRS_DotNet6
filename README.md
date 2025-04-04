@@ -307,6 +307,8 @@ Running line below inside ConfigurePipeline at HostingExtensions.cs to insert so
 InitializeDbTestData(app);
 ```
 
+**Identity DataBase** :
+
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/StoreAccount.png?raw=true)
 
 **Register a new User** :
@@ -331,6 +333,8 @@ Duende Identity Server **Admin** Page :
 
 <hr />
 
+**Identity Logging** :
+
 **Seq** is the self-hosted search, analysis, and alerting server built for structured log data.
 
 Sink Duende Identity Server **Event Logs** to the avaiable Seq Server on Docker :
@@ -343,7 +347,9 @@ Sink Duende Identity Server **Event Logs** to the avaiable Seq Server on Docker 
 
 <hr />
 
-# RabbitMQ with Docker :
+# Event Store :
+
+**RabbitMQ with Docker** :
 
 ```
 docker pull rabbitmq:4.0.7-management
