@@ -1,8 +1,11 @@
 
+using Microsoft.AspNetCore.Cors;
+
 namespace SsoSamples.IdentityServer.Pages.Login;
 
 [SecurityHeaders]
 [AllowAnonymous]
+[EnableCors("MyPolicy")]
 public class Index : PageModel
 {
     private readonly SignInManager<ApplicationUser> _signInManager;

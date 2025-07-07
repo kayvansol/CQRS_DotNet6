@@ -1,0 +1,32 @@
+services:
+
+  store.identityserver:
+    image: ${DOCKER_REGISTRY-}storeidentityserver
+    build:
+      context: .
+      dockerfile: Store.IdentityServer/Dockerfile
+    networks:
+      - my-network
+  
+      
+  store.mvc:
+    image: ${DOCKER_REGISTRY-}storemvc
+    build:
+      context: .
+      dockerfile: Store.MVC/Dockerfile
+    networks:
+      - my-network
+
+
+  store.api.rest:
+    image: ${DOCKER_REGISTRY-}storeapirest
+    build:
+      context: .
+      dockerfile: Store.Api.Rest/Dockerfile
+    networks:
+      - my-network
+
+
+networks:
+  my-network:
+    driver: bridge

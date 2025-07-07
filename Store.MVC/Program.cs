@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using System.IdentityModel.Tokens.Jwt;
 
 #region Services
@@ -7,11 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+IdentityModelEventSource.ShowPII = true;
+
 #endregion
 
 #region Authentication
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+bool inDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
 
 builder.Services.AddAuthentication(c =>
 {
@@ -21,6 +27,10 @@ builder.Services.AddAuthentication(c =>
   .AddOpenIdConnect("oidc", c =>
   {
       c.Authority = "https://localhost:7003";
+      if (inDocker)
+      {
+          c.MetadataAddress = "http://identityserver:8080/.well-known/openid-configuration";
+      }
       c.ClientId = "web";
       c.ClientSecret = "secret";
       c.ResponseType = "code";
@@ -31,6 +41,16 @@ builder.Services.AddAuthentication(c =>
       //c.Scope.Add("offline_access");
       c.GetClaimsFromUserInfoEndpoint = true;
       c.SaveTokens = true;
+      if (inDocker)
+      {
+          c.RequireHttpsMetadata = false;
+          c.Events.OnRedirectToIdentityProvider = context =>
+          {
+              context.ProtocolMessage.IssuerAddress = "https://localhost:7003/connect/authorize";
+              return Task.CompletedTask;
+          };
+      }
+      
   });
 
 #endregion
@@ -39,7 +59,22 @@ builder.Services.AddAuthentication(c =>
 
 builder.Services.AddHttpClient("w", c =>
 {
-    c.BaseAddress = new Uri("https://localhost:7084");
+    if (!inDocker)
+    {
+        c.BaseAddress = new Uri("https://localhost:7084");
+    }
+    else
+    {
+        c.BaseAddress = new Uri("https://api");
+    }
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    return new HttpClientHandler
+    {
+        ClientCertificateOptions = ClientCertificateOption.Manual,
+        ServerCertificateCustomValidationCallback =
+            (httpRequestMessage, cert, certChain, policyErrors) => true
+    };
 });
 
 #endregion

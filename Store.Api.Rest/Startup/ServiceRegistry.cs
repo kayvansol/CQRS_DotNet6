@@ -6,6 +6,7 @@ using Store.Api.Rest.Middlewares;
 using Store.Api.Rest.Services;
 using Store.Api.Rest.Mapper;
 using Store.Infra.Sql.Context;
+using Microsoft.Extensions.Options;
 //using Microsoft.EntityFrameworkCore.InMemory;
 
 namespace Store.Api.Rest.Startup
@@ -14,6 +15,11 @@ namespace Store.Api.Rest.Startup
     {
         public static void Register(this IServiceCollection services, IConfiguration configuration)
         {
+
+            /*services.AddHttpsRedirection(options =>
+            {
+                options.HttpsPort = 80;
+            });*/
 
             #region Public
 
@@ -116,15 +122,25 @@ namespace Store.Api.Rest.Startup
                  });
             });
 
+            bool inDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", option =>
                 {
                     option.Authority = "https://localhost:7003";
+                    if (inDocker)
+                    {
+                        option.MetadataAddress = "http://identityserver:8080/.well-known/openid-configuration";
+
+                        option.RequireHttpsMetadata = false;
+                        
+                    }
                     option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateAudience = false
                     };
-                    
+                    option.TokenValidationParameters.ValidateIssuer = false;
+                    option.TokenValidationParameters.NameClaimType = "name";
                 });
 
             #endregion

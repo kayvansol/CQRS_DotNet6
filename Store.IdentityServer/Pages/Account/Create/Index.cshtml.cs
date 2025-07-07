@@ -1,10 +1,13 @@
 // Copyright (c) Duende Software. All rights reserved.
 // See LICENSE in the project root for license information.
 
+using Microsoft.AspNetCore.Cors;
+
 namespace Store.IdentityServer.Pages.Create;
 
 [SecurityHeaders]
 [AllowAnonymous]
+[EnableCors("MyPolicy")]
 public class Index : PageModel
 {
     private readonly SignInManager<ApplicationUser> _signInManager;

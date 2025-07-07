@@ -1,8 +1,11 @@
 
+using Microsoft.AspNetCore.Cors;
+
 namespace Store.IdentityServer.Pages.Account.TwoFactor
 {
     [SecurityHeaders]
     [AllowAnonymous]
+    [EnableCors("MyPolicy")]
     public class Index : PageModel
     {
         [BindProperty]

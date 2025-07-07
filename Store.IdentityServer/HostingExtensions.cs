@@ -1,4 +1,7 @@
 
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
+
 namespace Store.IdentityServer;
 
 internal static class HostingExtensions
@@ -6,7 +9,7 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
 
-        const string connectionString = "Data Source=.;Initial Catalog=StoreAccount;Integrated Security=True;TrustServerCertificate=True";
+        const string connectionString = "Data Source=192.168.1.4;Initial Catalog=StoreAccount;User ID=sa;Password=ABCabc123456;TrustServerCertificate=True";
 
         var migrationsAssembly = typeof(HostingExtensions).GetTypeInfo().Assembly.GetName().Name;
 
@@ -16,7 +19,10 @@ internal static class HostingExtensions
         builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        var identityServerBuilder = builder.Services.AddIdentityServer(options => options.KeyManagement.Enabled = true);
+        var identityServerBuilder = builder.Services.AddIdentityServer(
+            options => {
+                options.KeyManagement.Enabled = true;                
+            });
 
 
         //.well-known/openid-configuration
@@ -50,6 +56,30 @@ internal static class HostingExtensions
 
         identityServerBuilder.AddAspNetIdentity<ApplicationUser>();
 
+        bool inDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+
+        if (inDocker)
+        {
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("MyPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
+            builder.Services.AddDataProtection()
+                    .SetApplicationName("identity")
+                    .PersistKeysToFileSystem(new System.IO.DirectoryInfo(@"/app/keys/"));
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+
+        }
+
         return builder.Build();
         
     }
@@ -74,6 +104,22 @@ internal static class HostingExtensions
         // uncomment if you want to add a UI
         app.UseAuthorization();
         app.MapRazorPages().RequireAuthorization();
+
+        bool inDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+
+        if (inDocker)
+        {
+
+            app.UseCors("MyPolicy");
+
+            app.UseAntiforgery();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
+
+        }
 
         return app;
     }

@@ -62,6 +62,7 @@ namespace Store.Api.Rest.Startup
 
             #endregion
 
+            //webApplication.UseHttpsRedirection();
         }
     }
 }
