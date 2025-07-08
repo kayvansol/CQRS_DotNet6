@@ -371,3 +371,43 @@ Order Message has been sent to RabbitMQ :
 An easy way to perform **background processing** in .NET and .NET Core applications. No Windows Service or separate process required.
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/hangfire.png?raw=true)
+
+
+# Dockerize the stack :
+
+Write settings for Kestrel for each service mentioned in the docker compose file :
+```
+"Kestrel": {
+  "EndPoints": {
+    "Https": {
+      "Url": "https://+:443",
+      "Certificates": {
+        "Path": "aspnetapp.pfx",
+        "Password": "123"
+      }
+    },
+    "Http": {
+      "Url": "http://+:80"
+    }
+  }
+}
+```
+then create docker compose file :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/composefile.png?raw=true)
+
+and at cmd shell execute the bellow command to run the stack :
+```
+docker compose up
+```
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/composeup.png?raw=true)
+
+at the docker desktop , check the images and containers :
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/dockerimages.png?raw=true)
+
+![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/dockerStack.png?raw=true)
+
+and now it's time to enjoy the stack.
+
