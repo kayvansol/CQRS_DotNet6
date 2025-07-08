@@ -372,10 +372,18 @@ An easy way to perform **background processing** in .NET and .NET Core applicati
 
 ![alt text](https://raw.githubusercontent.com/kayvansol/CQRS_DotNet6/refs/heads/main/img/hangfire.png?raw=true)
 
+<hr />
 
-# Dockerize the stack :
+# Containerize the Stack :
 
-Write settings for Kestrel for each service mentioned in the docker compose file :
+First for enabling the ssl (https), generate the certificate files by this command :
+```
+dotnet dev-certs https --trust -ep ./Store.Api.Rest/aspnetapp.pfx -p 123
+
+dotnet dev-certs https --trust -ep ./Store.MVC/aspnetmvc.pfx -p 123
+```
+
+and Write some settings in appsettings.json for Kestrel in each services mentioned in the docker compose file :
 ```
 "Kestrel": {
   "EndPoints": {
