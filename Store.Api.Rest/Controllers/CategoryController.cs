@@ -1,12 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Store.Core.Commands;
-using Store.Core.Queries;
-using Store.Domain.DTOs;
-using Store.Domain.DTOs.Category;
-
+﻿
 namespace Store.Api.Rest.Controllers
 {
     [Route("api/[controller]")]
@@ -14,7 +6,7 @@ namespace Store.Api.Rest.Controllers
     public class CategoryController : BaseController
     {
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost("GetAllCategories")]
         public async Task<ResultDto<List<GetAllCategoryDto>>> GetAllCategories(GetAllCategoryQuery query, CancellationToken cancellationToken)
         {

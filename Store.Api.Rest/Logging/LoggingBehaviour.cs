@@ -1,9 +1,4 @@
 ﻿
-using FluentValidation;
-using Newtonsoft.Json;
-using Store.Domain;
-using Store.Domain.Objects;
-
 namespace Store.Api.Rest.Logging
 {
     public class LoggingBehaviour<TRequest, TResponse>

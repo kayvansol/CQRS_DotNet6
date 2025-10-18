@@ -1,7 +1,4 @@
-﻿using Store.Domain.Entities;
-using System;
-using System.Collections.Generic;
-
+﻿
 namespace Store.Domain;
 
 public partial class Order: BaseEntity<int>

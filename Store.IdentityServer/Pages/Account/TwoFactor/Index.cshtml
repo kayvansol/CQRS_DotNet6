@@ -1,0 +1,41 @@
+﻿@page
+@model Store.IdentityServer.Pages.Account.TwoFactor.Index
+
+<div class="login-page">
+    <div class="lead">
+        <h1>Two Factor Auth</h1>
+        <p>Enter The Code</p>
+    </div>
+
+    <partial name="_ValidationSummary" />
+
+    <div class="row">
+
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Local Account</h2>
+                </div>
+
+                <div class="card-body">
+                    <form asp-page="/Account/TwoFactor/Index">
+                        <input type="hidden" asp-for="Input.ReturnUrl" />
+                        <input type="hidden" asp-for="Input.Username" />
+
+                        <div class="form-group">
+                            <label  >Two Factor Code</label>
+                            <input class="form-control" placeholder="Two Factor Code" asp-for="Input.TwoFactor" autofocus>
+                        </div>
+                        
+                        <button class="btn btn-success" name="Input.Button" value="login">ادامه</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

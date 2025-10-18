@@ -1,4 +1,5 @@
-﻿namespace Store.Api.Rest.Services
+﻿
+namespace Store.Api.Rest.Services
 {
     public interface ICronJobs
     {

@@ -1,3 +1,4 @@
+
 namespace Store.Api.Rest
 {
     public class WeatherForecast

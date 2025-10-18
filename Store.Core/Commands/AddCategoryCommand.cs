@@ -1,12 +1,4 @@
-﻿using MediatR;
-using Store.Domain;
-using Store.Domain.DTOs;
-using Store.Domain.DTOs.Category;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Store.Domain.DTOs.Category;
 
 namespace Store.Core.Commands
 {

@@ -1,12 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
-using Store.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Store.Infra.Sql.Repositories
 {
     public interface IRepository<Entity, Key> where Entity : BaseEntity<Key> where Key : notnull
@@ -24,7 +16,7 @@ namespace Store.Infra.Sql.Repositories
         Task<Entity?> Get(Key id);
 
         IQueryable<Entity> GetAll(Expression<Func<Entity, bool>>?
-            predict = null,
+            predicate = null,
             Func<IQueryable<Entity>, IOrderedQueryable<Entity>>? orderBy = null, bool disableTracking = true,
             Func<IQueryable<Entity>, IIncludableQueryable<Entity, object>>? Includes = null);
 

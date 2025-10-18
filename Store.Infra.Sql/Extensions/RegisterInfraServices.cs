@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Store.Infra.Sql.Repositories;
 using Store.Infra.Sql.Repositories.CategoryRepo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Store.Infra.Sql.Repositories.CustomerRepo;
+using Store.Infra.Sql.Repositories.OrderRepo;
+using Store.Infra.Sql.Repositories.ProductRepo;
 
 namespace Store.Infra.Sql.Extensions
 {
@@ -16,6 +14,9 @@ namespace Store.Infra.Sql.Extensions
             service.AddTransient(typeof(IRepository<,>), typeof(Repository<,>));
 
             service.AddScoped<ICategoryRepository, CategoryRepository>();
+            service.AddScoped<IProductRepository, ProductRepository>();
+            service.AddScoped<ICustomerRepository, CustomerRepository>();
+            service.AddScoped<IOrderRepository, OrderRepository>();
         }
     }
 }

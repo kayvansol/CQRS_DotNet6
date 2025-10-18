@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using Store.Core.Commands;
-
+﻿
 namespace Store.Core.Validators
 {
     public class AddCategoryCommandValidator: AbstractValidator<AddCategoryCommand>

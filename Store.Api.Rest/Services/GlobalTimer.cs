@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-
+﻿
 namespace Store.Api.Rest.Services
 {
     public class GlobalTimer : IHostedService, IDisposable

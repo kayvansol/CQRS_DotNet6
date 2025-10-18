@@ -1,0 +1,8 @@
+﻿
+
+
+Scaffold-DbContext "Data Source=.;Initial Catalog=Store;Integrated Security=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Context -Force
+
+
+
+Scaffold-DbContext "Data Source=.;Initial Catalog=LogDB;Integrated Security=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir LogContext -Force

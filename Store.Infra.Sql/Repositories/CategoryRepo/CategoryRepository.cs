@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using Store.Domain;
-using Store.Domain.DTOs.Category;
-using Store.Domain.Extensions;
-using Store.Infra.Sql.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Store.Domain.Extensions.PaginationExtension;
-
+﻿
 namespace Store.Infra.Sql.Repositories.CategoryRepo
 {
     public class CategoryRepository : Repository<Category, int>, ICategoryRepository
@@ -26,7 +15,7 @@ namespace Store.Infra.Sql.Repositories.CategoryRepo
             _mapper = mapper;
         }
 
-        public async Task<Category> Create(Category data)
+        public async Task<Category> CreateAsync(Category data)
         {
             _context.Add(data);
             _context.SaveChanges();
@@ -34,7 +23,7 @@ namespace Store.Infra.Sql.Repositories.CategoryRepo
             return data;
         }
 
-        public async Task<Pagination<GetAllCategoryDto>> GetAllCategories(int statrtPage, int pageSize)
+        public async Task<Pagination<GetAllCategoryDto>> GetAllCategoriesAsync(int statrtPage, int pageSize)
         {
             var list = _repo.GetAll();
 
@@ -45,7 +34,7 @@ namespace Store.Infra.Sql.Repositories.CategoryRepo
             return result;
         }
 
-        public async Task<List<GetAllCategoryDto>> GetAllCategories()
+        public async Task<List<GetAllCategoryDto>> GetAllCategoriesAsync()
         {
             var list = _repo.GetAll();
 

@@ -1,0 +1,14 @@
+
+
+
+dotnet dev-certs https --trust -ep ./Store.MVC/aspnetmvc.pfx -p 123
+
+dotnet dev-certs https --trust -ep ./Store.Api.Rest/aspnetapp.pfx -p 123
+
+
+
+
+
+dotnet dev-certs https --clean --import ./Store.MVC/aspnetmvc.pfx -p 123
+
+dotnet dev-certs https --clean --import ./Store.Api.Rest/aspnetapp.pfx -p 123

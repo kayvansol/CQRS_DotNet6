@@ -1,12 +1,13 @@
-﻿using Serilog;
-using Store.Api.Rest.Logging;
-
+﻿
 namespace Store.Api.Rest.Startup
 {
     public static class HostRegistery
     {
         public static void Register(this ConfigureHostBuilder configureHostBuilder, IConfiguration config)
         {
+
+            #region Serilog
+
             // Serilog Configs ...
 
             configureHostBuilder.UseSerilog();
@@ -22,6 +23,8 @@ namespace Store.Api.Rest.Startup
                 .WriteTo.Sink(new LoggingSqlServerSinkProvider(config["ApplicationOptions:LogDBConnectionString"], services));
 
             });
+
+            #endregion
 
         }
     }
